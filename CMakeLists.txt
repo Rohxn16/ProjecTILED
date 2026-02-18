@@ -6,8 +6,8 @@ add_executable(projectiled)
 target_sources(projectiled 
 PRIVATE
 	src/main.c
-	src/MapBuilder.c
-	src/Tile.c
+	src/MapSystem/MapBuilder.c
+	src/Destroyer/Destroyer.c
 )
 
 target_include_directories(projectiled

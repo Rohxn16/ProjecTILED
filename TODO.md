@@ -1,0 +1,3 @@
+- [x] Figure out the system to find block number from pixel position for the desroyer.
+- [x] Implement box destruction mechanism
+- [ ] Implement box destruction in a radius 

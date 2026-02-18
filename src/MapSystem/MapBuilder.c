@@ -1,4 +1,4 @@
-#include "MapBuilder.h"
+#include "MapSystem/MapBuilder.h"
 
 // release
 MapFile* buildMapFile()
@@ -43,19 +43,18 @@ void drawMap(MapFile* mapfile)
 	int col = mapfile->col;
 	for (int i = 0; i < row; i++) {
 		int r = i;
-		for (int j = col/2; j < col; j++) {
+		for (int j = 0; j < col; j++) {
 			r += 2;
 			Color color = {r, 100, 150, 255};
-			if (mapfile->mapdata[i][j] == 1) DrawRectangle(i*TILESIZE,j*TILESIZE,TILESIZE,TILESIZE,color);
+			if (mapfile->mapdata[i][j] == 1) 
+				DrawRectangle(i*TILESIZE,j*TILESIZE,TILESIZE,TILESIZE,color);
 		}
 	}
 }
 
-
 // debug
 void printMap(MapFile* map) 
 {
-
 	for (int i=0; i<map->row; i++) {
 		printf("----------------\n");
 		for (int j=0; j<map->col; j++) {

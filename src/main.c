@@ -1,12 +1,9 @@
-#include "BASE.h"
-#include "raylib.h"
-#include "MapBuilder.h"
+#include "Destroyer/Destroyer.h"
 
 int main(void)
 {
 	printf("Hello, World\n");
-	InitWindow(1280,720,"raylib");
-
+	
 	int rows = MX;
 	int cols = MY;
 	int **customMapFile = malloc(sizeof(int*) * rows);
@@ -14,25 +11,36 @@ int main(void)
 		customMapFile[i] = malloc(sizeof(int)*cols);
 	}
 	for(int i = 0; i < rows; i++){
+		for(int j = 0; j < cols/2; j++){
+			customMapFile[i][j] = 0;
+		}
+	}
+	for(int i = 0; i < rows; i++){
 		for(int j = cols/2; j < cols; j++){
 			customMapFile[i][j] = 1;
 		}
 	}
-
+	
 	MapFile *map = buildMapFile();
+	Destroyer *destroyer = createDestroyer(50,50, 2);
 	loadMap(map,customMapFile);
-
+	
 	// loadMap(map,);
-	printMap(map);
+	// printMap(map);
+	InitWindow(1280,720,"raylib");
+	SetTargetFPS(60);
 
 	while(!WindowShouldClose()) {
+		updateDestroyer(destroyer);
 		BeginDrawing();
-		ClearBackground(RAYWHITE);
+		ClearBackground(YELLOW);
 
 		// drawMap(map);
-		DrawRectangle(50,50,TILESIZE,TILESIZE,RED);
+		// DrawRectangle(50,50,TILESIZE,TILESIZE,RED);
 		drawMap(map);
+		drawDestroyer(destroyer);		
 
+		destroy(destroyer,map);
 		EndDrawing();
 	}
 	freeMapFile(map);
